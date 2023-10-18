@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 
 public class Graphics extends JFrame {
 
-    private JPanel MainPanel;
-
     public Graphics() {
         setTitle("Title");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
