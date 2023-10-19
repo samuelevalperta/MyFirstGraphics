@@ -31,13 +31,21 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
 
         boolean red;
         for (int xc = r; xc <= (w+r); xc += 2 * r) {
-
             // this will make the first circle of every column to be different from the first of the previous column
             red = (xc / (2 * r) % 2 == 0);
 
             for (int yc = r; yc <= (h+r); yc += 2 * r) {
                 g2.setColor(red ? Color.red : Color.blue);
                 fillCircle(g2, xc, yc, r);
+
+                // Highlight if mouse hover
+                if ((Math.abs(mouseCurrentPosition.x - xc) <= r) && (Math.abs(mouseCurrentPosition.y - yc) <= r)) {
+                    g2.setStroke(new BasicStroke(2));
+                    g2.setColor(Color.YELLOW);
+                    emptyCircle(g2, xc, yc, r);
+                    g2.setStroke(new BasicStroke(1));
+                }
+
                 red = !red;
             }
         }
@@ -59,8 +67,16 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         g2.fillOval(x, y, d, d);
     }
 
+    protected void emptyCircle(Graphics2D g2, int xc, int yc, int r){
+        int x = (xc - r);
+        int y = (yc - r);
+        int d = r * 2;
+        g2.drawOval(x, y, d, d);
+    }
+
     @Override
     public void mouseDragged(MouseEvent e) {
+
     }
 
     private int repaintCounter;
