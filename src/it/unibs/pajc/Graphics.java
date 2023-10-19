@@ -12,6 +12,7 @@ public class Graphics extends JFrame {
         setSize(300, 200);
         setLocationRelativeTo(null);
         PanelGraphics panelGraphics = new PanelGraphics();
+
         add(panelGraphics);
 
     }
