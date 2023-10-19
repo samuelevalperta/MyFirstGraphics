@@ -43,7 +43,7 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         }
 
         g2.setColor(Color.black);
-        g2.drawString(String.format("[%3d]", mouseCounter),10, 10);
+        g2.drawString(String.format("[%3d]", repaintCounter++),10, 10);
 
         g2.setColor(Color.yellow);
         if (mouseCurrentPosition != null) {
@@ -63,11 +63,10 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
     }
 
-    private int mouseCounter;
+    private int repaintCounter;
     private Point mouseCurrentPosition = null;
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.printf("Mouse Moved[%d]: %d, %d\n",mouseCounter++, e.getX(), e.getY());
         mouseCurrentPosition = e.getPoint();
         this.repaint();
     }
