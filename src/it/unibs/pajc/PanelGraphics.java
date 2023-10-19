@@ -31,7 +31,7 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         int d = 60;
         int r = d/2;
 
-        fillCircle(g, width/2, height/2, r);
+        fillCircle(g2, width/2, height/2, r);
 
     }
 
