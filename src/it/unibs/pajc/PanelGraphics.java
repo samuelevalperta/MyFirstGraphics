@@ -37,27 +37,29 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
             for (int yc = r; yc <= (h+r); yc += 2 * r) {
                 g2.setColor(red ? Color.red : Color.blue);
                 fillCircle(g2, xc, yc, r);
-
-                // Highlight if mouse hover
-                if ((Math.abs(mouseCurrentPosition.x - xc) <= r) && (Math.abs(mouseCurrentPosition.y - yc) <= r)) {
-                    g2.setStroke(new BasicStroke(2));
-                    g2.setColor(Color.YELLOW);
-                    emptyCircle(g2, xc, yc, r);
-                    g2.setStroke(new BasicStroke(1));
-                }
-
                 red = !red;
             }
         }
 
-        g2.setColor(Color.black);
-        g2.drawString(String.format("[%3d]", repaintCounter++),10, 10);
-
-        g2.setColor(Color.yellow);
         if (mouseCurrentPosition != null) {
+            g2.setColor(Color.yellow);
             fillCircle(g2, mouseCurrentPosition.x, mouseCurrentPosition.y, 10);
-        }
 
+            int circleGridX = mouseCurrentPosition.x / (2 * r);
+            int circleGridY = mouseCurrentPosition.y / (2 * r);
+
+            g2.setColor(Color.black);
+            g2.setFont(new Font("San Francisco", Font.PLAIN, 24));
+            g2.drawString(String.format("[%3d] %d, %d", repaintCounter++, circleGridX, circleGridY), 10, 24);
+
+            int realSelectedCircleX = circleGridX * (2 * r) + r;
+            int realSelectedCircleY = circleGridY * (2 * r) + r;
+
+            g2.setColor(Color.yellow);
+            g2.setStroke(new BasicStroke(2));
+            drawCircle(g2, realSelectedCircleX, realSelectedCircleY, r);
+            g2.setStroke(new BasicStroke(1));
+        }
     }
 
     protected void fillCircle(Graphics2D g2, int xc, int yc, int r){
@@ -67,7 +69,7 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         g2.fillOval(x, y, d, d);
     }
 
-    protected void emptyCircle(Graphics2D g2, int xc, int yc, int r){
+    protected void drawCircle(Graphics2D g2, int xc, int yc, int r){
         int x = (xc - r);
         int y = (yc - r);
         int d = r * 2;
