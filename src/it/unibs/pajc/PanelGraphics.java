@@ -6,13 +6,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-public class PanelGraphics extends JPanel implements MouseMotionListener {
+public class PanelGraphics extends JPanel {
     private JPanel panel1;
-
-    public PanelGraphics() {
-        this.addMouseMotionListener(this);
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -20,18 +15,22 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int width = getWidth();
-        int height = getHeight();
+        int w = getWidth();
+        int h = getHeight();
 
-        g.drawLine(0, 0, width, height);
-        g.drawLine(0, height, width, 0);
+        g.drawLine(0, 0, w, h);
+        g.drawLine(0, h, w, 0);
 
         g.setColor(Color.blue);
 
         int d = 60;
         int r = d/2;
 
-        fillCircle(g2, width/2, height/2, r);
+        for (int xc = r; xc <= (w+r); xc += 2 * r) {
+            for (int yc = r; xc <= (h+r); yc += 2 * r) {
+                //fillCircle(g2, xc, yc, r);
+            }
+        }
 
     }
 
@@ -40,15 +39,5 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         int y = (yc - r);
         int d = r * 2;
         g2.fillOval(x, y, d, d);
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        System.out.printf("Mouse Moved: %d, %d\n", e.getX(), e.getY());
     }
 }
