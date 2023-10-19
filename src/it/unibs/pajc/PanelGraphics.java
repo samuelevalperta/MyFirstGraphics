@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 public class PanelGraphics extends JPanel implements MouseMotionListener {
-    private JPanel panel1;
 
     public PanelGraphics() {
         this.addMouseMotionListener(this);
@@ -34,7 +33,7 @@ public class PanelGraphics extends JPanel implements MouseMotionListener {
         for (int xc = r; xc <= (w+r); xc += 2 * r) {
 
             // this will make the first circle of every column to be different from the first of the previous column
-            red = (xc / (2 * r) % 2 == 0 ? true : false);
+            red = (xc / (2 * r) % 2 == 0);
 
             for (int yc = r; yc <= (h+r); yc += 2 * r) {
                 g2.setColor(red ? Color.red : Color.blue);
